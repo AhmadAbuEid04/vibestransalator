@@ -65,15 +65,15 @@ Each post includes:
 
 ## Hackathon teammate notes
 
-- popup and settings live in [popup.js](/Users/ahmad0512/Documents/New project/popup.js)
+- Popup and settings live in [popup.js](/Users/ahmad0512/Documents/New project/popup.js)
 - Instagram overlay logic lives in [content.js](/Users/ahmad0512/Documents/New project/content.js)
-- the judge-safe demo feed lives in [demo/feed.js](/Users/ahmad0512/Documents/New project/demo/feed.js)
-- seeded content lives in [data/posts.json](/Users/ahmad0512/Documents/New project/data/posts.json)
+- The judge-safe demo feed lives in [demo/feed.js](/Users/ahmad0512/Documents/New project/demo/feed.js)
+- Seeded content lives in [data/posts.json](/Users/ahmad0512/Documents/New project/data/posts.json)
 
 ## Good next steps
 
-- add a smarter region detection pass for live Instagram posts
-- swap seeded translations for real AI responses
-- let users pin favorite regions or topics
-- compare how the same topic is discussed across multiple regions
-- add a compact "why am I seeing this?" explanation
+- Add a smarter region detection pass for live Instagram posts
+- Swap seeded translations for real AI responses
+- Let users pin favorite regions or topics
+- Compare how the same topic is discussed across multiple regions
+- Add a compact "why am I seeing this?" explanation
