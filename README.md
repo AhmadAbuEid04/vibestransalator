@@ -16,7 +16,7 @@ This project is intentionally Instagram-inspired and does not rely on the offici
 ## File structure
 
 ```text
-.
+
 ├── assets/
 ├── content.css
 ├── content.js
