@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vibestranslator</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup">
+      <div class="brand">
+        <p class="eyebrow">Instagram companion</p>
+        <h1>vibestranslator</h1>
+        <p class="tagline">See the vibe from everywhere but home.</p>
+      </div>
+
+      <form id="settings-form" class="panel">
+        <label class="field">
+          <span>Home region</span>
+          <select id="homeRegion" name="homeRegion">
+            <option value="US">United States</option>
+            <option value="Brazil">Brazil</option>
+            <option value="Japan">Japan</option>
+            <option value="France">France</option>
+            <option value="Korea">Korea</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Preferred language</span>
+          <select id="preferredLanguage" name="preferredLanguage">
+            <option value="English">English</option>
+            <option value="Spanish">Spanish</option>
+            <option value="Portuguese">Portuguese</option>
+            <option value="Japanese">Japanese</option>
+            <option value="French">French</option>
+            <option value="Korean">Korean</option>
+          </select>
+        </label>
+
+        <label class="toggle">
+          <input id="hideHomeRegion" name="hideHomeRegion" type="checkbox" />
+          <span>Hide my region</span>
+        </label>
+
+        <button class="primary" type="submit">Save settings</button>
+      </form>
+
+      <section class="panel actions">
+        <button id="openDemo" class="secondary" type="button">Open demo feed</button>
+        <p id="status" class="status">Settings are ready for your demo.</p>
+      </section>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

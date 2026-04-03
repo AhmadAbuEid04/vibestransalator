@@ -1,0 +1,90 @@
+[
+  {
+    "id": "br-01",
+    "username": "rioafterclass",
+    "region": "Brazil",
+    "language": "Portuguese",
+    "topic": "Campus life",
+    "originalCaption": "A cantina lotou depois da prova, todo mundo tentando se recuperar no pao de queijo.",
+    "translatedCaption": "The cafe filled up after the exam and everyone was trying to recover with cheese bread.",
+    "contextNote": "The post jokes about a brutal exam and the comfort-food ritual that follows. Pao de queijo is a familiar campus treat, so the vibe is stressed but affectionate.",
+    "imageStyle": "sunset-court"
+  },
+  {
+    "id": "jp-01",
+    "username": "tokyomidnightnotes",
+    "region": "Japan",
+    "language": "Japanese",
+    "topic": "Study culture",
+    "originalCaption": "Jishuushitsu mada man'in. Konya mo shuuden made ganbaru shika nai.",
+    "translatedCaption": "The study room is still packed. Looks like another push until the last train tonight.",
+    "contextNote": "This captures the late-night study grind. Mentioning the last train signals a familiar deadline for students staying on campus deep into the evening.",
+    "imageStyle": "neon-library"
+  },
+  {
+    "id": "fr-01",
+    "username": "parisflatwhite",
+    "region": "France",
+    "language": "French",
+    "topic": "Cafe culture",
+    "originalCaption": "Revision au cafe, terrasse pleine, personne n'a l'air presse mais tout le monde bosse.",
+    "translatedCaption": "Study session at the cafe, terrace full, nobody looks rushed but everyone is working.",
+    "contextNote": "The post highlights that calm-but-productive energy common in student cafe culture. The mood is less frantic and more quietly focused.",
+    "imageStyle": "cream-terrace"
+  },
+  {
+    "id": "kr-01",
+    "username": "seoulvibesonly",
+    "region": "Korea",
+    "language": "Korean",
+    "topic": "Nightlife",
+    "originalCaption": "Dongari moim kkeutnago noraebang gana? Oneul neomu jal beotyeotda.",
+    "translatedCaption": "Club meeting is over, karaoke next? Honestly we survived today.",
+    "contextNote": "The joke lands on the mix of exhaustion and social ritual. Noraebang, or karaoke rooms, are a familiar way to decompress after a long campus day.",
+    "imageStyle": "violet-city"
+  },
+  {
+    "id": "us-01",
+    "username": "campuscrumbs",
+    "region": "US",
+    "language": "English",
+    "topic": "Dorm life",
+    "originalCaption": "Laundry room diplomacy is real. If your timer goes off, your roommate is now your crisis manager.",
+    "translatedCaption": "Laundry room diplomacy is real. If your timer goes off, your roommate is now your crisis manager.",
+    "contextNote": "This is a light campus joke about shared dorm chaos, where even small chores become social events.",
+    "imageStyle": "warm-dorm"
+  },
+  {
+    "id": "br-02",
+    "username": "saopaulostories",
+    "region": "Brazil",
+    "language": "Portuguese",
+    "topic": "Music",
+    "originalCaption": "A fila para o show da atlética virou esquenta. Ninguém canta baixo por aqui.",
+    "translatedCaption": "The line for the student club show turned into a pre-party. Nobody sings quietly here.",
+    "contextNote": "The energy is communal and loud before the event even starts. The post celebrates the warm-up as part of the main event.",
+    "imageStyle": "festival-glow"
+  },
+  {
+    "id": "jp-02",
+    "username": "kyotocorner",
+    "region": "Japan",
+    "language": "Japanese",
+    "topic": "Food",
+    "originalCaption": "Kyou no gakushoku karee, omotta yori kanari atari datta.",
+    "translatedCaption": "Today’s cafeteria curry was way better than expected.",
+    "contextNote": "This is low-stakes campus joy. Gakushoku refers to student cafeteria food, and the surprise is that an ordinary meal felt like a win.",
+    "imageStyle": "golden-tray"
+  },
+  {
+    "id": "fr-02",
+    "username": "lyonletters",
+    "region": "France",
+    "language": "French",
+    "topic": "Politics",
+    "originalCaption": "AG ce matin, debat serre, mais tout le monde veut encore parler sur les marches apres.",
+    "translatedCaption": "General assembly this morning, tense debate, and people still want to keep talking on the steps after.",
+    "contextNote": "The post points to student political culture where discussion spills beyond the formal event. The vibe is intense but civic-minded.",
+    "imageStyle": "stone-steps"
+  }
+]

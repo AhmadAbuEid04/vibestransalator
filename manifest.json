@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "vibestranslator",
+  "version": "0.1.0",
+  "description": "An Instagram-inspired companion that surfaces translated posts and context from outside your region.",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://www.instagram.com/*"
+  ],
+  "action": {
+    "default_title": "vibestranslator",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instagram.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "data/posts.json",
+        "demo/feed.html",
+        "demo/feed.css",
+        "demo/feed.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}

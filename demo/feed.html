@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vibestranslator demo feed</title>
+    <link rel="stylesheet" href="feed.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">vibestranslator demo</p>
+        <h1>A feed from everywhere but home.</h1>
+        <p class="hero-copy">
+          This mock Instagram-style feed shows how translated posts and local
+          context can help users explore other regions.
+        </p>
+      </div>
+      <aside class="summary-card">
+        <p class="summary-label">Current filter</p>
+        <h2 id="summaryRegion">United States</h2>
+        <p id="summaryText" class="summary-text">Loading your settings...</p>
+      </aside>
+    </header>
+
+    <main>
+      <section id="feed" class="feed" aria-live="polite"></section>
+    </main>
+
+    <template id="post-template">
+      <article class="post">
+        <div class="post-image"></div>
+        <div class="post-body">
+          <div class="meta-row">
+            <div>
+              <p class="username"></p>
+              <p class="location"></p>
+            </div>
+            <span class="topic-pill"></span>
+          </div>
+          <p class="original-label">Original</p>
+          <p class="original-caption"></p>
+          <div class="translation-card">
+            <div class="translation-head">
+              <span class="translation-badge">Translated</span>
+              <span class="language-pill"></span>
+            </div>
+            <p class="translated-caption"></p>
+          </div>
+          <button class="context-button" type="button">Why this vibe?</button>
+          <p class="context-note" hidden></p>
+        </div>
+      </article>
+    </template>
+
+    <script src="feed.js"></script>
+  </body>
+</html>

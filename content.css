@@ -1,0 +1,112 @@
+:root {
+  --vt-card-bg: rgba(28, 22, 15, 0.9);
+  --vt-card-border: rgba(255, 255, 255, 0.12);
+  --vt-card-text: #fff9f0;
+  --vt-card-muted: rgba(255, 249, 240, 0.72);
+  --vt-card-accent: #ff9b68;
+  --vt-card-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
+.vt-post-anchor {
+  position: relative !important;
+}
+
+.vt-card {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 20;
+  width: min(300px, calc(100% - 24px));
+  padding: 12px;
+  border: 1px solid var(--vt-card-border);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  background: var(--vt-card-bg);
+  color: var(--vt-card-text);
+  box-shadow: var(--vt-card-shadow);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.vt-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.vt-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--vt-card-text);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.vt-title,
+.vt-context {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.vt-title strong {
+  color: var(--vt-card-accent);
+}
+
+.vt-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.vt-button {
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--vt-card-text);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.vt-context[hidden] {
+  display: none;
+}
+
+.vt-home-hidden {
+  opacity: 0.18 !important;
+  filter: grayscale(1) blur(1px);
+}
+
+.vt-foreign-focus {
+  box-shadow: 0 0 0 2px rgba(255, 155, 104, 0.85);
+  border-radius: 16px;
+}
+
+.vt-banner {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999999;
+  max-width: 320px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(28, 22, 15, 0.94);
+  color: #fff9f0;
+  box-shadow: var(--vt-card-shadow);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.vt-banner p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.vt-banner a {
+  color: #ffb386;
+}
