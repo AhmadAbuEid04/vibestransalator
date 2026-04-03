@@ -5,31 +5,101 @@ const VT_DEFAULT_SETTINGS = {
 };
 
 const INJECTION_MARKER = "data-vt-enhanced";
+const OPENAI_API_KEY = "YOUR_OPENAI_API_KEY_HERE"; // Replace with your actual OpenAI API key
 
 async function getSettings() {
   return chrome.storage.local.get(VT_DEFAULT_SETTINGS);
 }
 
-async function getPosts() {
-  const response = await fetch(chrome.runtime.getURL("data/posts.json"));
-  return response.json();
+function getCaptionText(article) {
+  const captionCandidates = [
+    'h1',
+    'span[dir="auto"]',
+    'div[role="button"] span',
+    'ul li span'
+  ];
+
+  for (const selector of captionCandidates) {
+    const nodes = Array.from(article.querySelectorAll(selector));
+    const textNode = nodes.find((node) => {
+      const text = node.textContent?.trim();
+      return text && text.length > 20;
+    });
+
+    if (textNode) {
+      return textNode.textContent.trim();
+    }
+  }
+
+  return "";
 }
 
-function createCard(post) {
+async function translateAndExplain(caption, preferredLanguage) {
+  const prompt = `
+Translate this Instagram caption into ${preferredLanguage}. Then explain any slang, cultural reference, or local context in one short sentence.
+
+Return valid JSON only in this format:
+{
+  "translation": "translated text",
+  "context": "short context explanation"
+}
+
+If context is unclear, use:
+"No special context detected."
+
+Caption:
+${caption}
+  `.trim();
+
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${OPENAI_API_KEY}`
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      temperature: 0.3
+    })
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`OpenAI request failed: ${response.status} ${errorText}`);
+
+  }
+
+  const data = await response.json();
+  const raw = data.choices?.[0]?.message?.content || "{}";
+  return JSON.parse(raw);
+}
+
+function createCard(article, settings) {
+  const realCaption = getCaptionText(article);
+
   const card = document.createElement("aside");
   card.className = "vt-card";
 
   const pills = document.createElement("div");
   pills.className = "vt-pill-row";
   pills.innerHTML = `
-    <span class="vt-pill">${post.region}</span>
-    <span class="vt-pill">${post.language}</span>
-    <span class="vt-pill">${post.topic}</span>
+    <span class="vt-pill">Live post</span>
+    <span class="vt-pill">${settings.preferredLanguage}</span>
   `;
 
-  const title = document.createElement("p");
-  title.className = "vt-title";
-  title.innerHTML = `<strong>Translated:</strong> ${post.translatedCaption}`;
+  const original = document.createElement("p");
+  original.className = "vt-title";
+  original.innerHTML = `<strong>Original:</strong> ${realCaption || "No caption detected."}`;
+
+  const translated = document.createElement("p");
+  translated.className = "vt-title";
+  translated.innerHTML = `<strong>Translated:</strong> Click the button to generate.`;
 
   const actions = document.createElement("div");
   actions.className = "vt-actions";
@@ -37,20 +107,44 @@ function createCard(post) {
   const button = document.createElement("button");
   button.className = "vt-button";
   button.type = "button";
-  button.textContent = "Explain context";
+  button.textContent = "Translate + explain";
 
   const context = document.createElement("p");
   context.className = "vt-context";
   context.hidden = true;
-  context.textContent = post.contextNote;
+  context.textContent = "";
 
-  button.addEventListener("click", () => {
-    context.hidden = !context.hidden;
-    button.textContent = context.hidden ? "Explain context" : "Hide context";
+  button.addEventListener("click", async () => {
+    if (!realCaption) {
+      translated.innerHTML = "<strong>Translated:</strong> No caption detected.";
+      context.hidden = false;
+      context.textContent = "No special context detected.";
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Loading...";
+    translated.innerHTML = "<strong>Translated:</strong> Generating...";
+    context.hidden = false;
+    context.textContent = "Analyzing context...";
+
+    try {
+      const result = await translateAndExplain(realCaption, settings.preferredLanguage);
+      translated.innerHTML = `<strong>Translated:</strong> ${result.translation}`;
+      context.textContent = result.context;
+      button.textContent = "Regenerate";
+    } catch (error) {
+      translated.innerHTML = "<strong>Translated:</strong> Request failed.";
+      context.textContent = "Could not generate context right now.";
+      button.textContent = "Try again";
+      console.error(error);
+    } finally {
+      button.disabled = false;
+    }
   });
 
   actions.appendChild(button);
-  card.append(pills, title, actions, context);
+  card.append(pills, original, translated, actions, context);
   return card;
 }
 
@@ -63,41 +157,29 @@ function showBanner() {
   banner.className = "vt-banner";
   banner.innerHTML = `
     <p>
-      vibestranslator is running. For the most reliable hackathon demo,
-      open the extension popup and launch the built-in demo feed.
+      vibestranslator is running. Click "Translate + explain" on a post to generate live translation and context.
     </p>
   `;
 
   document.body.appendChild(banner);
 }
 
-function pickPost(posts, index) {
-  return posts[index % posts.length];
-}
-
-function enhanceArticles(posts, settings) {
+function enhanceArticles(settings) {
   const articles = Array.from(document.querySelectorAll("article"));
   if (!articles.length) {
     showBanner();
     return;
   }
 
-  articles.forEach((article, index) => {
+  articles.forEach((article) => {
     if (article.hasAttribute(INJECTION_MARKER)) {
       return;
     }
 
-    const post = pickPost(posts, index);
     article.setAttribute(INJECTION_MARKER, "true");
     article.classList.add("vt-post-anchor");
-
-    if (settings.hideHomeRegion && post.region === settings.homeRegion) {
-      article.classList.add("vt-home-hidden");
-    } else if (post.region !== settings.homeRegion) {
-      article.classList.add("vt-foreign-focus");
-    }
-
-    article.appendChild(createCard(post));
+    article.classList.add("vt-foreign-focus");
+    article.appendChild(createCard(article, settings));
   });
 }
 
@@ -107,11 +189,11 @@ async function boot() {
   }
 
   try {
-    const [settings, posts] = await Promise.all([getSettings(), getPosts()]);
-    enhanceArticles(posts, settings);
+    const settings = await getSettings();
+    enhanceArticles(settings);
     showBanner();
 
-    const observer = new MutationObserver(() => enhanceArticles(posts, settings));
+    const observer = new MutationObserver(() => enhanceArticles(settings));
     observer.observe(document.body, { childList: true, subtree: true });
   } catch (error) {
     showBanner();
@@ -120,3 +202,4 @@ async function boot() {
 }
 
 boot();
+
